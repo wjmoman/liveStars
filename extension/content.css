@@ -1,0 +1,15 @@
+/* liveStars injected styles (highlight + changelog) / Styles injectés */
+.ls-updated { background: #fff3b0; border-radius: 3px; padding: 0 2px; }
+#ls-changelog .ls-changelog {
+  font-family: system-ui, sans-serif; max-width: 560px; margin: 16px auto;
+  border: 1px solid #e0e0e0; border-radius: 10px; overflow: hidden; background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,.15);
+}
+#ls-changelog .ls-cl-head { background: #d00000; color: #fff; padding: 10px 14px; font-size: 13px; font-weight: 600; }
+#ls-changelog .ls-cl-table { width: 100%; border-collapse: collapse; font-size: 13px; color: #222; }
+#ls-changelog .ls-cl-table th, #ls-changelog .ls-cl-table td { padding: 7px 10px; text-align: left; border-bottom: 1px solid #f0f0f0; }
+#ls-changelog .ls-cl-table th { background: #fafafa; font-size: 11px; text-transform: uppercase; letter-spacing: .03em; color: #666; }
+#ls-changelog .ls-row-changed .ls-old { color: #b00020; text-decoration: line-through; }
+#ls-changelog .ls-row-changed .ls-new { color: #0a7a28; font-weight: 700; }
+#ls-changelog .ls-row-same { color: #999; }
+#ls-changelog .ls-row-same .ls-new { color: #999; }

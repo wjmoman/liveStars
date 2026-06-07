@@ -1,0 +1,18 @@
+{
+  "name": "livestars",
+  "version": "0.1.0",
+  "description": "Browser widget that replaces stale HuskerBoard recruit ratings with live On3/247/Rivals/ESPN data.",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "inspect": "node server/inspect-on3.js",
+    "dev": "node server/dev-server.js",
+    "test": "node test/board-post.test.js && node test/auto.test.js && node test/extension.test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "jsdom": "^29.1.1"
+  }
+}

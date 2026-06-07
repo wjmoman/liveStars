@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>liveStars — real board post overwrite demo</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body { font-family: Georgia, serif; background:#1c1f22; color:#d8dde0; margin:0; padding:24px; }
+    .post { max-width:720px; margin:0 auto 16px; background:#23272b; border:1px solid #33383d; border-radius:8px; }
+    .post-head { background:#2b3a42; color:#fff; padding:10px 14px; font-size:13px; border-radius:8px 8px 0 0; }
+    .bbWrapper { padding:16px; line-height:1.7; font-family:system-ui,sans-serif; font-size:14px; }
+    .bbWrapper a { color:#5aa0ff; }
+    .bbWrapper img.smilie { width:18px; height:18px; vertical-align:-3px; }
+    .controls { max-width:720px; margin:0 auto 16px; }
+    .controls button { background:#d00000; color:#fff; border:0; padding:9px 16px; border-radius:6px; font-size:14px; cursor:pointer; }
+    .note { font-family:system-ui,sans-serif; font-size:12px; color:#9aa3a8; max-width:720px; margin:0 auto 16px; }
+    .ls-changelog { background:#23272b; }
+  </style>
+</head>
+<body>
+  <div class="controls"><button onclick="run()">⭐ Refresh ratings with liveStars</button></div>
+  <p class="note">This embeds the REAL HuskerBoard post markup (stale numbers). Click to overwrite the
+  rank/rating numbers in place from live data (via the page's Rivals/247/ESPN links) and list every change.
+  Star icons are left unchanged for now.</p>
+
+  <div class="post">
+    <div class="post-head">CB Example Recruit [Commit] — first post</div>
+    <div class="bbWrapper"><b>Player</b>: Example Recruit<br />
+<b>Hometown</b>: Anytown, USA<br />
+<b>School</b>: Example HS<br />
+<b>Position</b>: Cornerback<br />
+<b>Height</b>: 6-2<br />
+<b>Weight</b>: 175<br />
+<b>Visits</b>: TBD<br />
+<br />
+<a href="https://x.com/example" target="_blank" rel="noopener">X</a><br />
+<br />
+<b>Rivals Industry</b>: #197 Overall; #21 CB; 90.56; <img class="smilie" alt="⭐" src="https://cdn.jsdelivr.net/joypixels/assets/8.0/png/unicode/64/2b50.png" /><img class="smilie" alt="⭐" src="https://cdn.jsdelivr.net/joypixels/assets/8.0/png/unicode/64/2b50.png" /><img class="smilie" alt="⭐" src="https://cdn.jsdelivr.net/joypixels/assets/8.0/png/unicode/64/2b50.png" /><img class="smilie" alt="⭐" src="https://cdn.jsdelivr.net/joypixels/assets/8.0/png/unicode/64/2b50.png" /><br />
+<b>247 Composite</b>: #205 Overall; #21 CB; .9255; <img class="smilie" alt="⭐" src="https://cdn.jsdelivr.net/joypixels/assets/8.0/png/unicode/64/2b50.png" /><img class="smilie" alt="⭐" src="https://cdn.jsdelivr.net/joypixels/assets/8.0/png/unicode/64/2b50.png" /><img class="smilie" alt="⭐" src="https://cdn.jsdelivr.net/joypixels/assets/8.0/png/unicode/64/2b50.png" /><img class="smilie" alt="⭐" src="https://cdn.jsdelivr.net/joypixels/assets/8.0/png/unicode/64/2b50.png" /><br />
+<br />
+<a href="https://n.rivals.com/content/athletes/example-recruit-000000?view=pv" target="_blank" rel="noopener">Rivals</a>: #177 Overall; #16 CB; <img class="smilie" alt="⭐" src="https://cdn.jsdelivr.net/joypixels/assets/8.0/png/unicode/64/2b50.png" /><img class="smilie" alt="⭐" src="https://cdn.jsdelivr.net/joypixels/assets/8.0/png/unicode/64/2b50.png" /><img class="smilie" alt="⭐" src="https://cdn.jsdelivr.net/joypixels/assets/8.0/png/unicode/64/2b50.png" /><img class="smilie" alt="⭐" src="https://cdn.jsdelivr.net/joypixels/assets/8.0/png/unicode/64/2b50.png" /><br />
+<a href="https://247sports.com/Player/Example-Recruit-000000/" target="_blank" rel="noopener">247</a>: #208 Overall; #25 CB; <img class="smilie" alt="⭐" src="https://cdn.jsdelivr.net/joypixels/assets/8.0/png/unicode/64/2b50.png" /><img class="smilie" alt="⭐" src="https://cdn.jsdelivr.net/joypixels/assets/8.0/png/unicode/64/2b50.png" /><img class="smilie" alt="⭐" src="https://cdn.jsdelivr.net/joypixels/assets/8.0/png/unicode/64/2b50.png" /><img class="smilie" alt="⭐" src="https://cdn.jsdelivr.net/joypixels/assets/8.0/png/unicode/64/2b50.png" /><br />
+ESPN: #244 Overall; #26 CB; <img class="smilie" alt="⭐" src="https://cdn.jsdelivr.net/joypixels/assets/8.0/png/unicode/64/2b50.png" /><img class="smilie" alt="⭐" src="https://cdn.jsdelivr.net/joypixels/assets/8.0/png/unicode/64/2b50.png" /><img class="smilie" alt="⭐" src="https://cdn.jsdelivr.net/joypixels/assets/8.0/png/unicode/64/2b50.png" /><br />
+<br />
+<b><a href="https://www.hudl.com/profile/000000/Example-Recruit" target="_blank" rel="noopener">Hudl</a></b></div>
+  </div>
+
+  <div id="ls-changelog"></div>
+
+  <script>window.LIVESTARS_API = '/api/recruit';</script>
+  <script src="widget.js"></script>
+  <script>
+    async function run() {
+      try {
+        var links = liveStars.findSourceLinks(document); // → { rivals, s247, espn }
+        var recruit = await liveStars.getRecruit({ links: links });
+        liveStars.updateBoardPost(recruit, { postSelector: '.bbWrapper' });
+      } catch (e) {
+        document.getElementById('ls-changelog').textContent = 'liveStars error: ' + (e.message || e);
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>liveStars — Demo</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style> body{font-family:system-ui,sans-serif;background:#f4f5f6;padding:24px;} h1{font-size:18px;} .note{font-size:12px;color:#777;max-width:520px;} </style>
+</head>
+<body>
+  <h1>liveStars — widget demo</h1>
+  <p class="note">Offline demo: loads <code>sample/recruit-sample.json</code>. To use live data, set
+  <code>window.LIVESTARS_API</code> to your deployed proxy URL (see README).</p>
+
+  <div id="ls-mount"></div>
+
+  <script>
+    // For live data, uncomment and point to your deployed proxy:
+    // Pour des données en direct, décommentez et pointez vers votre proxy déployé :
+    // window.LIVESTARS_API = 'https://your-proxy.vercel.app/api/recruit';
+  </script>
+  <script src="widget.js"></script>
+  <script>
+    liveStars.mount(document.getElementById('ls-mount'), {
+      name: 'Example Recruit',
+      year: 2027,
+      sampleUrl: '../sample/recruit-sample.json'
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "liveStars",
+  "version": "0.1.0",
+  "description": "Replaces stale HuskerBoard recruit ratings with live On3 / 247 / Rivals / ESPN data.",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "livestars@huskerboard.com",
+      "strict_min_version": "115.0"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.huskerboard.com/*"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "host_permissions": [
+    "*://*.on3.com/*",
+    "*://*.247sports.com/*",
+    "*://*.rivals.com/*",
+    "*://*.espn.com/*"
+  ]
+}

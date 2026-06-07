@@ -1,0 +1,20 @@
+# Dependencies / Dépendances
+node_modules/
+
+# Scraped third-party HTML fixtures (contain tracking scripts + personal data — keep out of public repo)
+# Fixtures HTML tierces récupérées (données personnelles — exclure du dépôt public)
+server/fixtures/
+
+# Secrets / environment
+.env
+.env.*
+*.key
+*.pem
+
+# Logs / OS / editor
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

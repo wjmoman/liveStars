@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>liveStars — In-place overwrite demo (mock HuskerBoard post)</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body { font-family: Georgia, serif; background:#f0f2f4; margin:0; padding:24px; color:#222; }
+    .post { max-width:640px; margin:0 auto 18px; background:#fff; border:1px solid #d8dde0; border-radius:8px; }
+    .post-head { background:#2b3a42; color:#fff; padding:10px 14px; font-size:14px; border-radius:8px 8px 0 0; }
+    .post-body { padding:16px; }
+    .profile { width:100%; border-collapse:collapse; font-family:system-ui,sans-serif; font-size:14px; margin-top:8px; }
+    .profile th, .profile td { border:1px solid #e2e2e2; padding:6px 10px; text-align:center; }
+    .profile th { background:#f3f4f6; }
+    .profile td:first-child, .profile th:first-child { text-align:left; }
+    .links a { color:#1456b8; margin-right:12px; font-family:system-ui,sans-serif; font-size:13px; }
+    .controls { max-width:640px; margin:0 auto 16px; font-family:system-ui,sans-serif; }
+    .controls button { background:#d00000; color:#fff; border:0; padding:9px 16px; border-radius:6px; font-size:14px; cursor:pointer; }
+    .note { font-family:system-ui,sans-serif; font-size:12px; color:#777; max-width:640px; margin:0 auto 16px; }
+  </style>
+</head>
+<body>
+  <div class="controls">
+    <button onclick="runLiveStars()">⭐ Refresh ratings with liveStars</button>
+  </div>
+  <p class="note">Mock HuskerBoard post with intentionally STALE hardcoded ratings. Click the button:
+  liveStars reads the On3 profile link below, fetches live data via the proxy, overwrites the stale
+  cells in place (highlighted), and lists every change underneath.</p>
+
+  <div class="post">
+    <div class="post-head">Re: CB/DL Recruit [Commit Thread] — posted by HuskerFan</div>
+    <div class="post-body">
+      <p>Here's the latest on our guy. Ratings as of when I posted this:</p>
+
+      <table class="profile">
+        <thead>
+          <tr><th>Site</th><th>Stars</th><th>Rating</th><th>Natl</th><th>Pos</th><th>State</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>247Sports</td>
+            <td data-ls-site="247Sports" data-ls-field="stars">3</td>
+            <td data-ls-site="247Sports" data-ls-field="rating">0.8800</td>
+            <td data-ls-site="247Sports" data-ls-field="natRank">#520</td>
+            <td data-ls-site="247Sports" data-ls-field="posRank">#48</td>
+            <td data-ls-site="247Sports" data-ls-field="stateRank">#70</td>
+          </tr>
+          <tr>
+            <td>On3</td>
+            <td data-ls-site="On3" data-ls-field="stars">4</td>
+            <td data-ls-site="On3" data-ls-field="rating">90.0</td>
+            <td data-ls-site="On3" data-ls-field="natRank">#300</td>
+            <td data-ls-site="On3" data-ls-field="posRank">#25</td>
+            <td data-ls-site="On3" data-ls-field="stateRank">#40</td>
+          </tr>
+          <tr>
+            <td>ESPN</td>
+            <td data-ls-site="ESPN" data-ls-field="stars">3</td>
+            <td data-ls-site="ESPN" data-ls-field="rating">79</td>
+            <td data-ls-site="ESPN" data-ls-field="natRank">#250</td>
+            <td data-ls-site="ESPN" data-ls-field="posRank">#22</td>
+            <td data-ls-site="ESPN" data-ls-field="stateRank">#30</td>
+          </tr>
+          <tr>
+            <td>On3 Industry</td>
+            <td data-ls-site="On3 Industry" data-ls-field="stars">4</td>
+            <td data-ls-site="On3 Industry" data-ls-field="rating">91.0</td>
+            <td data-ls-site="On3 Industry" data-ls-field="natRank">#330</td>
+            <td data-ls-site="On3 Industry" data-ls-field="posRank">#28</td>
+            <td data-ls-site="On3 Industry" data-ls-field="stateRank">#42</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="links" style="margin-top:14px;">
+        Profiles (replace with a real recruit's profile URLs to fetch live data):
+        <a href="https://www.on3.com/db/example-recruit-000000/">On3</a>
+        <a href="https://247sports.com/player/example-recruit-000000/">247Sports</a>
+        <a href="https://www.espn.com/college-sports/football/recruiting/player/_/id/000000/example-recruit">ESPN</a>
+      </p>
+    </div>
+  </div>
+
+  <div id="ls-changelog"></div>
+
+  <script>
+    // Same-origin proxy when served by the dev server (npm run dev).
+    // Proxy même origine quand servi par le serveur de dev.
+    window.LIVESTARS_API = '/api/recruit';
+  </script>
+  <script src="widget.js"></script>
+  <script>
+    async function runLiveStars() {
+      try {
+        var links = liveStars.findSourceLinks(document);   // grabs the On3 profile link
+        var recruit = await liveStars.getRecruit({ links: links });
+        liveStars.updateInPlace(recruit);                  // overwrite + changelog
+      } catch (e) {
+        document.getElementById('ls-changelog').textContent = 'liveStars error: ' + (e.message || e);
+      }
+    }
+  </script>
+</body>
+</html>

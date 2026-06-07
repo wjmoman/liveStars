@@ -1,0 +1,18 @@
+{
+  "name": "Example Recruit",
+  "position": "CB",
+  "classYear": 2027,
+  "height": "6-2",
+  "weight": 175,
+  "hometown": "Anytown, USA",
+  "highSchool": "Example HS",
+  "commit": { "school": "Example University", "date": "2026-06-06" },
+  "ratings": [
+    { "site": "247 Composite", "stars": 4, "rating": 0.9123, "natRank": 321, "posRank": 37, "stateRank": 40 },
+    { "site": "On3", "stars": 4, "rating": 92.1, "natRank": 280, "posRank": 30, "stateRank": 38 },
+    { "site": "Rivals", "stars": 4, "rating": null, "natRank": 321, "posRank": 37, "stateRank": null },
+    { "site": "ESPN", "stars": 4, "rating": null, "natRank": null, "posRank": null, "stateRank": null }
+  ],
+  "source": "sample",
+  "updatedAt": "2026-06-06T00:00:00Z"
+}
